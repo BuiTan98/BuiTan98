@@ -42,6 +42,28 @@
       
           <button class="form-submit">Đăng ký</button>
         </form>
+
+        <!-- Thêm from Đăng nhập -->
+        <form action="" method="POST" class="form" id="form-2">
+          <h3 class="heading">Đăng nhập</h3>
+          <p class="desc"> Nhóm học lập trình JavaScript cơ bản ❤️</p>
+      
+          <div class="spacer"></div>
+      
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" name="email" type="text" placeholder="VD: buitan@gmail.com" class="form-control">
+            <span class="form-message"></span>
+          </div>
+      
+          <div class="form-group">
+            <label for="password" class="form-label">Mật khẩu</label>
+            <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+            <span class="form-message"></span>
+          </div>
+      
+          <button class="form-submit">Đăng nhập</button>
+        </form>
       
       </div>
 
@@ -53,6 +75,7 @@
         // Mong muốn của chúng ta
         Validator({
           form: '#form-1',
+          fromGroupSelector: '.form-group',
           errorSelector: '.form-message',
           rules: [
             Validator.isRequired('#fullname', 'Vui lòng nhập tên đầy đủ của bạn'),
@@ -63,6 +86,25 @@
             Validator.isConfirmed('#password_confirmation', function () { 
               return document.querySelector('#form-1 #password').value;
             }, 'Mật khẩu nhập lại không chính xác')
+          ],
+          onSubmit: function (data) {
+
+            // Call API
+            console.log(data);
+          }
+        });
+
+
+
+        //*** Thêm cho phần Đăng nhập ***
+        Validator({
+          form: '#form-2',
+          fromGroupSelector: '.form-group',
+          errorSelector: '.form-message',
+          rules: [
+            Validator.isRequired('#email'),
+            Validator.isEmail('#email'),
+            Validator.minLength('#password', 6),
           ],
           onSubmit: function (data) {
 
